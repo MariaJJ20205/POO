@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de tareas</title>
+</head>
+<body>
+    <h1>Lista</h1>
+
+    <input type="text" id="tarea" placeholder="Escribir tarea">
+    <button id="agregar">Agregar</button>
+
+    <ul id="lista"></ul>
+
+    <script>
+        class ListadeTareas {
+            constructor(idContador, lista){
+                this.idContador = 0
+                this.lista =document.getElementById('lista')
+            }
+
+            agregartarea(tarea){
+                if (tarea.trim()==='') return; 
+
+                this.idContador++
+
+                const nuevatarea = document.createElement('li')
+                nuevatarea.textContent = tarea
+                nuevatarea.id = `tarea número ${this.idContador}`
+
+                this.lista.appendChild(nuevatarea)
+            }
+        }
+
+
+        const listatareas = new ListadeTareas()
+
+        document.getElementById('agregar').addEventListener('click', ()=> {
+            const tareainput = document.getElementById('tarea')
+            const tareatexto = tareainput.value
+
+            listatareas.agregartarea(tareatexto)
+            tareainput.value=''
+        })
+    </script>
+</body>
+</html>

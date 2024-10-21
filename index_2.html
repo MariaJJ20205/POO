@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cambio de fondo</title>
+</head>
+<body>
+    <h1>Cambiar color</h1>
+
+    <p id="parrafo">Lorem ipsum dolor sit amet consectetur,
+         adipisicing elit. Voluptatum qui, sunt soluta 
+         distinctio minima dolore fugit ea architecto eum 
+         placeat saepe magnam numquam dicta corporis, fuga 
+         similique modi debitis obcaecati?</p>
+
+    <button id="boton">Cambiar</button>
+
+    <script>
+        class Elemento {
+            constructor(elemento){
+                this.elemento=elemento
+
+            }
+
+            cambiarcolor(color) {
+                this.elemento.style.backgroundColor=color
+            }
+        }
+
+
+        class Boton extends Elemento {
+            constructor(elemento, boton){
+                super (elemento)
+                this.boton=boton
+
+            }
+
+            cambiocolor(color) {
+                this.boton.addEventListener('click', ()=>{
+                    this.cambiarcolor(color)
+                })
+            }
+        }
+
+        const parrafo = document.getElementById('parrafo')
+        const boton = document.getElementById('boton')
+        const botoncambio = new Boton (parrafo, boton)
+
+        botoncambio.cambiocolor('#FF0099')
+    </script>
+</body>
+</html>

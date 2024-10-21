@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programación orientada a objetos</title>
+</head>
+<body>
+
+    <h1>Empresa</h1>
+    
+    <button id="admin">Administrador</button>
+    <button id="comer">Comercial</button>
+
+    <p id="salida"></p>
+    <script>
+        class Usuario{
+            constructor(nombre, edad){
+                this.nombre = nombre
+                this.edad = edad
+            }
+        }
+
+        class Administrador extends Usuario{
+            constructor(nombre, edad, rol){
+                super(nombre, edad)
+                this.rol = "Administrador"
+            }
+            mostrarInfo(){
+                const salida = document.getElementById('salida')
+                salida.innerText = `Nombre: ${this.nombre}, Edad: ${this.edad}, Rol: ${this.rol}`
+            }
+
+        }
+
+        class Comercial extends Usuario{
+            constructor(nombre, edad, rol){
+                super(nombre, edad)
+                this.rol = "Comercial"
+            }
+            mostrarInfo(){
+                const salida = document.getElementById('salida')
+                salida.innerText = `Nombre: ${this.nombre}, Edad: ${this.edad}, Rol: ${this.rol}`
+            }
+
+        }
+
+        const admin = new Administrador ('Maria', 19)
+        const comer = new Comercial ('Lupe', 5)
+
+        document.getElementById('admin').addEventListener('click', ()=>{
+            admin.mostrarInfo()
+        })
+
+        document.getElementById('comer').addEventListener('click', ()=>{
+            comer.mostrarInfo()
+        })
+    </script>
+</body>
+</html>

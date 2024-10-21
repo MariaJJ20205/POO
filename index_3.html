@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tareas</title>
+</head>
+    <style>
+        li{
+            margin-top: 10px ;
+        }
+
+        button{
+            margin-left: 10px;
+        }
+    </style>
+<body>
+    <h1>Tareas</h1>
+
+    <input type="text" id="nombreTarea" placeholder="Nombre de la tarea">
+    <input type="text" id="persona" placeholder="Persona asignada">
+    <button id="agregartarea">Agregar tarea</button>
+
+    <ul id="listatareas"></ul>
+
+    <script>
+        class AdminTareas{
+            constructor(lista, idcontador){
+                this.lista = document.getElementById('listatareas')
+                this.idcontador = 0
+            }
+
+            agregartarea(nombreTarea, persona){
+                if (nombreTarea.trim() === '' || persona.trim() === '') return
+
+                this.idcontador++
+
+                const li =document.createElement('li')
+                li.id = `Tarea-${this.idcontador}`
+                li.innerHTML = `
+                    <span><strong>${nombreTarea}</strong> asignada a <strong>${persona}</strong></span>
+                    <button class="editar">Editar</button>
+                    <button class="eliminar">Eliminar</button>
+                `
+
+                li.querySelector('.editar').addEventListener('click', ()=> this.editartarea(li.id))
+                li.querySelector('.eliminar').addEventListener('click', ()=> this.eliminartarea(li.id))
+
+                this.lista.appendChild(li)
+        }
+
+        editartarea(idtarea){
+            const li = document.getElementById(idtarea);
+            const nombreTarea = prompt ('Editar nombre de la tarea', li.querySelector('strong').innerText)
+            const persona = prompt ('Editar persona asignada', li.querySelector('strong')[1].innerText)
+
+            if (nombreTarea.trim() !== '' && persona.trim() !== ''){
+                li.querySelector('strong').innerText = nombreTarea
+                li.querySelector('strong')[1].innerText = persona
+            }
+        }
+
+        eliminartarea(idtarea){
+            const li = document.getElementById(idtarea)
+            this.lista.removeChild(li)
+        }
+
+    }
+
+    const admintareas = new AdminTareas()
+
+    document.getElementById('agregartarea').addEventListener('click', () =>{
+        const nombreTarea= document.getElementById('nombreTarea').value
+        const persona= document.getElementById('persona').value
+
+        admintareas.agregartarea(nombreTarea, persona)
+
+        document.getElementById('nombreTarea').value = ''
+        document.getElementById('persona').value = ''
+    })
+    </script>
+</body>
+</html>
